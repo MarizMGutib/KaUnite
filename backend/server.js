@@ -1,25 +1,20 @@
 const express = require('express');
-const dotenv = require('dotenv');
-const connectDB = require('./config/connect.cjs'); // Import the connectDB function
-
-// Load environment variables
-dotenv.config();
-
-// Connect to MongoDB
-connectDB();
+const connectDB = require('./connect.cjs');
 
 const app = express();
 
-// Middleware to parse JSON
-app.use(express.json());
+// Middleware and route setup here...
 
-// Example route
-app.get('/', (req, res) => {
-  res.send('API is running...');
-});
-
-// Start the server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+
+connectDB()
+  .then(client => {
+    // MongoDB is connected, start the server
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  })
+  .catch(error => {
+    console.error('Failed to connect to MongoDB', error);
+    process.exit(1);
+  });
