@@ -1,11 +1,57 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 
 interface SignupModalProps {
   onClose: () => void;
 }
 
+
 const SignupModal: React.FC<SignupModalProps> = ({ onClose }) => {
+  const [formData, setFormData] = useState({
+    fullName: "",
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    agreeTerms: false,
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type, checked } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+    if (!formData.agreeTerms) {
+      alert("Please agree to the terms and conditions");
+      return;
+    } 
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      if (response.ok) {
+        alert("Signup successful");
+        onClose();
+      } else {
+        const error = await response.json();
+        alert(error.message);
+      }
+    } catch (error) {
+      console.error("Signup error:", error);
+      alert("An error occurred during signup");
+    }
+  }; 
   return (
     <>
       <div className="modal mb-[45rem]">
@@ -15,7 +61,7 @@ const SignupModal: React.FC<SignupModalProps> = ({ onClose }) => {
       <div className="w-full max-w-[30rem] rounded-2xl bg-white p-8 shadow-lg">
         <div className="w- max-w-lg rounded-lg bg-white p-8">
           <h2 className="mb-6 text-center text-2xl font-semibold">Sign Up</h2>
-          <form>
+          <form onSubmit={handleSubmit}>
             <div className="mb-4">
               <label
                 htmlFor="full-name"
@@ -24,11 +70,15 @@ const SignupModal: React.FC<SignupModalProps> = ({ onClose }) => {
                 Full Name
               </label>
               <div className="relative mt-1">
-                <input
+              <input
                   type="text"
-                  id="full-name"
+                  id="fullName"
+                  name="fullName"
+                  value={formData.fullName}
+                  onChange={handleChange}
                   placeholder="Enter your full name"
                   className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-1 focus:ring-green-500"
+                  required
                 />
                 <span className="absolute inset-y-0 right-3 flex items-center">
                 <Image
@@ -52,6 +102,9 @@ const SignupModal: React.FC<SignupModalProps> = ({ onClose }) => {
                 <input
                   type="text"
                   id="username"
+                  name="username"
+                  value={formData.username}
+                  onChange={handleChange}
                   placeholder="Enter your username"
                   className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-1 focus:ring-green-500"
                 />
@@ -77,6 +130,9 @@ const SignupModal: React.FC<SignupModalProps> = ({ onClose }) => {
                 <input
                   type="email"
                   id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   placeholder="Enter your email address"
                   className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-1 focus:ring-green-500"
                 />
@@ -102,6 +158,9 @@ const SignupModal: React.FC<SignupModalProps> = ({ onClose }) => {
                 <input
                   type="password"
                   id="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
                   placeholder="Create a password"
                   className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-1 focus:ring-green-500"
                 />
@@ -127,6 +186,9 @@ const SignupModal: React.FC<SignupModalProps> = ({ onClose }) => {
                 <input
                   type="password"
                   id="confirm-password"
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
                   placeholder="Confirm your password"
                   className="w-full rounded-lg border border-gray-300 px-4 py-2 focus:outline-none focus:ring-1 focus:ring-green-500"
                 />
@@ -144,6 +206,9 @@ const SignupModal: React.FC<SignupModalProps> = ({ onClose }) => {
               <input
                 type="checkbox"
                 id="terms"
+                name="agreeTerms"
+                checked={formData.agreeTerms}
+                onChange={handleChange}
                 className="mr-2 h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
               />
               <label htmlFor="terms" className="text-sm text-gray-700">
