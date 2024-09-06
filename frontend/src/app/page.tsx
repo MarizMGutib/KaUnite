@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Navbar from "@/components/navbar";
 import { useRouter } from "next/navigation";
+import LoginModal from "@/components/loginModal";
 
 type DataProps = {
   message: String;
@@ -13,6 +14,8 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<DataProps | null>(null);
   const router = useRouter();
+  const [showLoginModal, setShowLoginModal] = useState(false);
+
 
   useEffect(() => {
     setTimeout(() => {
@@ -39,16 +42,17 @@ export default function Dashboard() {
             Future
           </p>
           <div className="pt-[2rem]">
-            <button
-              className="flex h-[3rem] w-[10rem] items-center justify-center rounded-lg bg-[#00BFA5]"
-              onClick={() => router.push("/login")}
-            >
-              <p className="text-xl font-medium tracking-wide text-white">
-                Get Started
-              </p>
-            </button>
+             <button
+          className="flex h-[3rem] w-[10rem] items-center justify-center rounded-lg bg-[#00BFA5]"
+          onClick={() => setShowLoginModal(true)}
+        >
+          <p className="text-xl font-medium tracking-wide text-white">
+            Get Started
+          </p>
+        </button>
           </div>
         </div>
+        {showLoginModal && <LoginModal onClose={() => setShowLoginModal(false)} />}
       </div>
       <div className="pt-2">
         <div className="h-[35rem] bg-[#E7E9E8]">

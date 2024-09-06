@@ -9,13 +9,11 @@ async function connectDB() {
     await client.connect();
     console.log("MongoDB Connected");
 
-    // List sa tanang database ok????
     const databasesList = await client.db().admin().listDatabases();
     console.log("Databases:");
     databasesList.databases.forEach(db => console.log(` - ${db.name}`));
 
-    // List collections in the db
-    const dbName = "KaUnite"; // replace with actual db name
+    const dbName = "KaUnite"; 
     const collections = await client.db(dbName).listCollections().toArray();
     console.log(`\nCollections in ${dbName}:`);
     collections.forEach(collection => console.log(` - ${collection.name}`));

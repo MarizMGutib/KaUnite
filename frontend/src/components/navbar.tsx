@@ -1,8 +1,9 @@
 "use client";
+import { useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { usePathname } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
+import LoginModal from "@/components/loginModal";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -13,6 +14,7 @@ const navLinks = [
 ];
 
 export default function Navbar() {
+  const [showLoginModal, setShowLoginModal] = useState(false);
   const { data: session } = useSession();
   const router = useRouter();
   const pathname = usePathname();
@@ -24,33 +26,48 @@ export default function Navbar() {
   };
 
   return (
-    <div className="bg-[#165B4B] p-6">
-      <div className="container flex">
-        <div className="text-2xl font-bold tracking-wide text-white">
-          KaUnite
-        </div>
-        <div className="flex-1 space-x-20 text-center">
-          {navLinks.map((link) => {
-            const isActive = pathname === link.href;
+    <div className="bg-[#165B4B] py-6">
+      <div className="container flex items-center justify-between">
+        {/* Left side: Logo and Navigation */}
+        <div className="flex items-center space-x-8">
+          {/* Logo */}
+          <div className="text-2xl font-bold tracking-wide text-white">
+            KaUnite
+          </div>
 
-            return (
-              <Link
-                href={link.href}
-                key={link.name}
-                className={isActive ? "text-gray-400" : "text-white"}
-              >
-                {link.name}
-              </Link>
-            );
-          })}
+          {/* Navigation Links */}
+          <div className="flex space-x-20 pl-[8rem]">
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+
+              return (
+                <Link
+                  href={link.href}
+                  key={link.name}
+                  className={isActive ? "text-gray-400" : "text-white"}
+                >
+                  {link.name}
+                </Link>
+              );
+            })}
+          </div>
         </div>
+
+        {/* Right side: Login Button */}
         <div>
-          <Link href="/login" className="ml-[20rem] text-white">
-           <span className="text-white">Login</span>
-          </Link>
-          
+          <button
+            onClick={() => setShowLoginModal(true)}
+            className=" text-white cursor-pointer"
+          >
+            Login
+          </button>
         </div>
       </div>
+
+      {/* Login Modal */}
+      {showLoginModal && (
+        <LoginModal onClose={() => setShowLoginModal(false)} />
+      )}
     </div>
   );
 }
