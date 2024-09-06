@@ -2,7 +2,7 @@ const { MongoClient } = require("mongodb");
 require("dotenv").config({ path: "./config.env" });
 
 async function connectDB() {
-  const uri = process.env.ATLAS_URI;
+  const uri = process.env.ATLAS_URI || 'mongodb://localhost:27017/KaUnite'; // Fallback for local MongoDB
   const client = new MongoClient(uri);
 
   try {

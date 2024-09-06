@@ -51,6 +51,8 @@ const SignupModal: React.FC<SignupModalProps> = ({ onClose, onSwitchToLogin }) =
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
+    // Client-side validation (optional)
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match");
       return;
@@ -58,11 +60,14 @@ const SignupModal: React.FC<SignupModalProps> = ({ onClose, onSwitchToLogin }) =
     if (!formData.agreeTerms) {
       alert("Please agree to the terms and conditions");
       return;
-    } 
+    }
+  
     try {
-      const response = await fetch("http://localhost:5000/api/auth/signup", {
+      const response = await fetch("http://10.10.8.77:5000/user/signup", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           fullName: formData.fullName,
           username: formData.username,
@@ -70,10 +75,10 @@ const SignupModal: React.FC<SignupModalProps> = ({ onClose, onSwitchToLogin }) =
           password: formData.password,
         }),
       });
-
+  
       if (response.ok) {
         alert("Signup successful");
-        onClose();
+        onClose();  // Close the modal after successful signup
       } else {
         const error = await response.json();
         alert(error.message);
@@ -83,6 +88,7 @@ const SignupModal: React.FC<SignupModalProps> = ({ onClose, onSwitchToLogin }) =
       alert("An error occurred during signup");
     }
   };
+  
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
