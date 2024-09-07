@@ -3,7 +3,7 @@ import { useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
-import LoginModal from "@/components/loginModal";
+import LoginModal from "@/components/LoginModal";
 
 const navLinks = [
   { name: "Home", href: "/" },

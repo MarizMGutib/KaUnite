@@ -1,11 +1,11 @@
 'use client'
 import React, { useState } from 'react'
-import ResidentInfo from '@/components/residentsInfo'
-import VaccinationRecords from '@/components/vaccinationRecords'
-import DiseaseOutbreakMonitoring from '@/components/diseaseOutbreakMonitoring'
-import MedicalMissions from '@/components/medicalMissions'
-import HealthAlerts from '@/components/healthAlerts'
-import GeneralHealthRecords from '@/components/generalHealthRecords'
+import ResidentInfo from '@/components/ResidentsInfo'
+import VaccinationRecords from '@/components/VaccinationRecords'
+import DiseaseOutbreakMonitoring from '@/components/DiseaseOutbreakMonitoring'
+import MedicalMissions from '@/components/MedicalMissions'
+import HealthAlerts from '@/components/HealthAlerts'
+import GeneralHealthRecords from '@/components/GeneralHealthRecords'
 import { useRouter } from 'next/navigation'
 
 

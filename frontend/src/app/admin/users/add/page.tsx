@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import Button from "@/components/adminButton";
+import Button from "@/components/AdminButton";
 const Add = () => {
   function handleAdd(): void {
     throw new Error("Function not implemented.");

@@ -1,4 +1,4 @@
-import LoadingSkeleton from "@/components/loadingSkeleton";
+import LoadingSkeleton from "@/components/LoadingSkeleton";
 import React from "react";
 
 function Loading() {

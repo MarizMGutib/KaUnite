@@ -1,13 +1,18 @@
-// import { Request, Response } from "express";
-import User from "../model/user.model.js";
+import User from '../models/User.model.js'; // Make sure this import is correct
 
-// Signup controller
 export const signup = async (req, res) => {
   const { fullName, username, email, password } = req.body;
 
+  console.log("Request body:", req.body);
+
+  // Check if all required fields are provided
+  if (!fullName || !username || !email || !password) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
+
   try {
     // Check if user already exists
-    let user = await User.findOne({ email });
+    let user = await User.findOne({ $or: [{ email }, { username }] });
     if (user) {
       return res.status(400).json({ message: "User already exists" });
     }
@@ -17,14 +22,16 @@ export const signup = async (req, res) => {
       fullName,
       username,
       email,
-      password,
+      password, // Note: You should hash this password before saving
     });
 
-    await user.save();
+    // Save user to database
+    const savedUser = await user.save();
+    console.log("User created successfully:", savedUser);
 
-    res.status(201).json({ message: "User created successfully" });
+    res.status(201).json({ message: "User created successfully", userId: savedUser._id });
   } catch (error) {
-    console.error("Error in signup:", error);
-    res.status(500).json({ message: "Server error" });
+    console.error("Error in signup:", error.message, error.stack);
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 };

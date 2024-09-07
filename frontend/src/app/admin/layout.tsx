@@ -1,7 +1,7 @@
 
-import ProvidersWrappers from "@/components/providerWrappers";
-import AdminSidebar from "@/components/adminSidebar";
-import AdminHeader from "@/components/adminHeader";
+import ProvidersWrappers from "@/components/ProviderWrappers";
+import AdminSidebar from "@/components/AdminSidebar";
+import AdminHeader from "@/components/AdminHeader";
 
 
 export default function RootLayout({

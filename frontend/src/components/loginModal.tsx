@@ -3,7 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import SignupModal from "@/components/signupModal";
+import SignupModal from"@/components/SignupModal";
 import { signIn } from "next-auth/react";
 
 interface LoginModalProps {
@@ -56,7 +56,7 @@ const Login: React.FC<LoginModalProps> = ({ onClose }) => {
     setIsLoading(true);
   
     try {
-      const res = await fetch('http://localhost:5000/api/auth/login', {
+      const res = await fetch('http://localhost:5000/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

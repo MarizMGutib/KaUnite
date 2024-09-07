@@ -1,10 +1,10 @@
 "use client";
-import LoadingSkeleton from "@/components/loadingSkeleton";
+import LoadingSkeleton from "@/components/LoadingSkeleton";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import Navbar from "@/components/navbar";
+import Navbar from "@/components/Navbar";
 import { useRouter } from "next/navigation";
-import LoginModal from "@/components/loginModal";
+import LoginModal from "@/components/LoginModal";
 
 type DataProps = {
   message: String;
