@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import Button from "@/components/AdminButton";
+
 const Add = () => {
   function handleAdd(): void {
     throw new Error("Function not implemented.");
@@ -11,86 +12,71 @@ const Add = () => {
   }
 
   return (
-    <div className="w-full">
+    <div className="w-full px-4 sm:px-6 lg:px-8">
       <div className="w-full text-center">
-        <h1 className="mb-6 flex items-center justify-center pt-[4rem] text-2xl font-bold ">
+        <h1 className="mb-8 flex items-center justify-center pt-8 sm:pt-12 text-2xl font-bold">
           Add User
         </h1>
       </div>
-      <form className="flex w-full gap-4 px-[20rem] pt-[8rem]">
-        <div className="">
-          <div className="mb-4 w-[25rem] pl-[4rem]">
-            <label htmlFor="name" className="mb-2 block">
-              {" "}
-              First Name
-            </label>
+      <form className="flex flex-col lg:flex-row w-full gap-8 lg:gap-16 max-w-6xl mx-auto">
+        <div className="w-full lg:w-1/2 space-y-6">
+          <div>
+            <label htmlFor="fname" className="mb-2 block text-sm font-medium">First Name</label>
             <input
               type="text"
               id="fname"
               name="fname"
-              className="w-full rounded-lg border px-3 py-2"
+              className="w-full max-w-md rounded-lg border px-3 py-2"
               required
             />
           </div>
-          <div className="mb-4 pl-[4rem]">
-            <label htmlFor="name" className="mb-2 block">
-              {" "}
-              Last Name
-            </label>
+          <div>
+            <label htmlFor="lname" className="mb-2 block text-sm font-medium">Last Name</label>
             <input
               type="text"
               id="lname"
               name="lname"
-              className="w-full rounded-lg border px-3 py-2"
+              className="w-full max-w-md rounded-lg border px-3 py-2"
               required
             />
           </div>
-          <div className="mb-4 pl-[4rem]">
-            <label htmlFor="name" className="mb-2 block">
-              M.I
-            </label>
+          <div>
+            <label htmlFor="mname" className="mb-2 block text-sm font-medium">M.I</label>
             <input
               type="text"
               id="mname"
               name="mname"
-              className="w-full rounded-lg border px-3 py-2"
-              required
+              className="w-full max-w-md rounded-lg border px-3 py-2"
             />
           </div>
-          <div className="mb-4 pl-[4rem]">
-            <label htmlFor="email" className="mb-2 block">
-              Email
-            </label>
+          <div>
+            <label htmlFor="email" className="mb-2 block text-sm font-medium">Email</label>
             <input
               type="email"
               id="email"
               name="email"
-              className="w-full rounded-lg border px-3 py-2"
+              className="w-full max-w-md rounded-lg border px-3 py-2"
               required
             />
           </div>
         </div>
-        <div className="w-[30rem] pl-[10rem]">
-          <div className="mb-4">
-            <label htmlFor="phone" className="mb-2 block">
-              Phone Number
-            </label>
+        <div className="w-full lg:w-1/2 space-y-6">
+          <div>
+            <label htmlFor="phone" className="mb-2 block text-sm font-medium">Phone Number</label>
             <input
               type="tel"
               id="phone"
               name="phone"
-              className="w-full rounded-lg border px-3 py-2"
+              className="w-full max-w-md rounded-lg border px-3 py-2"
               required
             />
           </div>
-          <div className="mb-4">
-            <label htmlFor="role" className="mb-2 block">
-              Role
-            </label>
+          <div>
+            <label htmlFor="role" className="mb-2 block text-sm font-medium">Role</label>
             <select
               id="role"
               name="role"
-              className="w-full rounded-lg border px-3 py-2"
+              className="w-full max-w-md rounded-lg border px-3 py-2"
               required
             >
               <option value="">Select a role</option>
@@ -98,14 +84,12 @@ const Add = () => {
               <option value="admin">Admin</option>
             </select>
           </div>
-          <div className="mb-4">
-            <label htmlFor="status" className="mb-2 block">
-              Status
-            </label>
+          <div>
+            <label htmlFor="status" className="mb-2 block text-sm font-medium">Status</label>
             <select
               id="status"
               name="status"
-              className="w-full rounded-lg border px-3 py-2"
+              className="w-full max-w-md rounded-lg border px-3 py-2"
               required
             >
               <option value="">Select a status</option>
@@ -113,7 +97,7 @@ const Add = () => {
               <option value="inactive">Inactive</option>
             </select>
           </div>
-          <div className="flex justify-center gap-4 w-[22rem] pt-[5rem]">
+          <div className="flex pl-[11rem] gap-4 pt-[5rem]">
             <Button variant="cancel" onClick={handleCancel}>
               Cancel
             </Button>
