@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "start": "nodemon server.js",
-    "dev": "ts-node-dev --respawn --transpile-only src/index.ts"
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+     "check-db": "node connect.cjs"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

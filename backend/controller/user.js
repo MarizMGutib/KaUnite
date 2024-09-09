@@ -1,6 +1,6 @@
-import User from '../models/User.model.js'; // Make sure this import is correct
+import User from '../models/user.js'; // Make sure this import is correct
 
-export const signup = async (req, res) => {
+export const signupUser = async (req, res) => {
   const { fullName, username, email, password } = req.body;
 
   console.log("Request body:", req.body);

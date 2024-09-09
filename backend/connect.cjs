@@ -15,7 +15,7 @@ async function connectDB() {
 
     const dbName = "KaUnite"; 
     const collections = await client.db(dbName).listCollections().toArray();
-    console.log(`\nCollections in ${dbName}:`);
+    console.log(`Collections in ${dbName}:`);
     collections.forEach(collection => console.log(` - ${collection.name}`));
 
     return client;
