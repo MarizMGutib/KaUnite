@@ -10,8 +10,6 @@ const AdminHeader = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
   const handleLogout = () => {
-    // Perform any logout logic here (e.g., clearing local storage, cookies, etc.)
-    // Then redirect to the root page
     router.push('/');
   };
   return (
